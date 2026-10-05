@@ -1,0 +1,111 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "cmake-dev",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_CONFIGURATION_TYPES": "Debug;Release",
+        "CMAKE_CXX_FLAGS": "/EHsc /MP /W4 /WX /external:W0 $penv{CXXFLAGS}",
+        "CMAKE_CXX_FLAGS_RELEASE": "/O2 /DNDEBUG"
+      },
+      "errors": {
+        "deprecated": true
+      },
+      "warnings": {
+        "deprecated": true,
+        "dev": true
+      }
+    },
+    {
+      "name": "vcpkg",
+      "hidden": true,
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+    },
+    {
+      "name": "windows",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<$<CONFIG:Debug>:Debug>",
+        "VCPKG_TARGET_TRIPLET": "x64-windows-static"
+      }
+    },
+    {
+      "name": "base",
+      "hidden": true,
+      "inherits": [ "cmake-dev", "vcpkg", "windows" ]
+    },
+    {
+      "name": "vs2026",
+      "hidden": true,
+      "generator": "Visual Studio 18 2026",
+      "toolset": "v145"
+    },
+    {
+      "name": "se",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "RUNTIME": "SE"
+      }
+    },
+    {
+      "name": "ae1170",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/buildae1170",
+      "cacheVariables": {
+        "BUILD_SKYRIMAE": true,
+        "RUNTIME": "AE1170",
+        "CommonLibSSEPath": "$env{CommonLibSSE1170Path}"
+      }
+    },
+    {
+      "name": "ae",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/buildae",
+      "cacheVariables": {
+        "BUILD_SKYRIMAE": true,
+        "RUNTIME": "AE"
+      }
+    },
+    {
+      "name": "vs2026-se",
+      "inherits": [ "base", "vs2026", "se" ]
+    },
+    {
+      "name": "vs2026-ae1170",
+      "inherits": [ "base", "vs2026", "ae1170" ]
+    },
+    {
+      "name": "vs2026-ae",
+      "inherits": [ "base", "vs2026", "ae" ]
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "release",
+      "hidden": true,
+      "configuration": "Release"
+    },
+    {
+      "name": "vs2026-se",
+      "inherits": "release",
+      "configurePreset": "vs2026-se"
+    },
+    {
+      "name": "vs2026-ae1170",
+      "inherits": "release",
+      "configurePreset": "vs2026-ae1170"
+    },
+    {
+      "name": "vs2026-ae",
+      "inherits": "release",
+      "configurePreset": "vs2026-ae"
+    }
+  ]
+}

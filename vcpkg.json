@@ -1,0 +1,14 @@
+﻿{
+  "name": "exampleplugin",
+  "version-string": "1.0.0",
+  "description": "",
+  "homepage": "",
+  "license": "GPL-3.0-or-later",
+  "dependencies": [
+    "commonlib-shared",
+    "flick-api",
+    "skse-mcp",
+    "spdlog"
+  ],
+  "builtin-baseline": "ee12231b20c95013c6638d845d04c91559a1d1ff"
+}
