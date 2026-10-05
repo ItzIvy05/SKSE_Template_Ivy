@@ -32,12 +32,6 @@ cmake --preset vs2026-ae
 cmake --build --preset vs2026-ae
 ```
 
-| Runtime | Preset | Output |
-|---|---|---|
-| SE 1.5.97 | `vs2026-se` | `build/Release` |
-| AE 1.6.1170 | `vs2026-ae1170` | `buildae1170/Release` |
-| AE 1.7.104+ | `vs2026-ae` | `buildae/Release` |
-
 #### FEATURES
 
 - One DLL per runtime: SE 1.5.97, AE 1.6.1170 and AE 1.7.104+.
